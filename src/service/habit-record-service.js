@@ -71,6 +71,8 @@ const HabitRecordsService = {
 
 
     async getCheckedStatusRange(startDate, endDate, habitID) {
+        console.log('startDate', startDate)
+        console.log('endDate', endDate)
         try {
             const url = `${config.API_ENDPOINT}/habit-matrix/${startDate}/${endDate}/${habitID}`
             const res = await axios.get(url, await this.reqHeaders())
@@ -95,7 +97,7 @@ const HabitRecordsService = {
                 , habitID
                 , await this.reqHeaders())
             const resToggle = res.data;
-            // console.log('resToggle', resToggle)
+            console.log('resToggle', resToggle)
             // return resToggle;
         } catch (error) {
             console.log('error', error)

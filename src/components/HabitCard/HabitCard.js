@@ -306,14 +306,18 @@ const HabitCard = props => {
     useEffect(() => {
 
         if (checkedDates.length === 0) {
-
+            const startDate = dayjs()
+                .startOf('day')
+                .subtract(6, 'day')
+                .format('YYYY-MM-DD')
+            const endDate = dayjs()
+                .startOf('day')
+                .format('YYYY-MM-DD')
+            console.log('startDate', startDate)
+            console.log('endDate', endDate)
             fetchCheckedStatusForHabitID(
-                dayjs().subtract(6, 'day')
-                    // .utc()
-                    .format('YYYY-MM-DD')
-                , dayjs()
-                    // .utc()
-                    .format('YYYY-MM-DD')
+                startDate
+                , endDate
                 , habitID)
 
         }
@@ -322,56 +326,62 @@ const HabitCard = props => {
 
 
 
-    const handleSelectDay = async (day) => {
-        console.log('handleSelectDay ran')
+    // const handleSelectDay = async (day) => {
+    //     console.log('handleSelectDay ran')
 
-        loadingToast();
+    //     loadingToast();
 
-        const dateSelected = getDateSelected(day);
+    //     const dateSelected = getDateSelected(day);
 
-        // if a user selects a date, then clicks again to unselect,
-        // need to delete that date from the record
-        const isAlreadyChecked = isChecked(habitID, day);
+    //     // if a user selects a date, then clicks again to unselect,
+    //     // need to delete that date from the record
+    //     const isAlreadyChecked = isChecked(habitID, day);
 
-        if (isAlreadyChecked) {
-            await deleteRecord(await findIdxToDelete(habitID, dateSelected));
-            setHabitRecordsToContext();
-            setSelectedId(habitID);
-            successToastDelete(habitID, dateSelected);
-        } else {
-            await postRecord(dateSelected);
-            setHabitRecordsToContext();
-            setSelectedId(habitID);
-            successToastPost(habitID, dateSelected);
-        }
-    }
+    //     if (isAlreadyChecked) {
+    //         await deleteRecord(await findIdxToDelete(habitID, dateSelected));
+    //         setHabitRecordsToContext();
+    //         setSelectedId(habitID);
+    //         successToastDelete(habitID, dateSelected);
+    //     } else {
+    //         await postRecord(dateSelected);
+    //         setHabitRecordsToContext();
+    //         setSelectedId(habitID);
+    //         successToastPost(habitID, dateSelected);
+    //     }
+    // }
 
     const toggleDateCompleted = async (i, habitID) => {
+        console.log('i', i)
         loadingToast();
 
         const date = dayjs().subtract(6 - i, 'day')
-            .format()
+            // .format('YYYY-MM-DD')
         console.log('date', date)
         try {
-            HabitRecordsService.toggleDate(date, habitID)
+            const toggledDate = await HabitRecordsService.toggleDate(date, habitID)
+            console.log('toggledDate', toggledDate)
         } catch (error) {
             console.log('error', error)
         }
     }
 
     function renderCheckMarkOptions() {
+        // console.log('checkedDates', checkedDates)
+        // const correctedDates = checkedDates.map((date, i) => {
+        //     // console.log('date.calendar_day', date.calendar_day)
+        //     // console.log('date.checked', date.checked)
+        //     let temp = dayjs(date.calendar_day).startOf('day').utc().format();
+        //     date.calendar_day = temp
+        //     // console.log('date.calendar_day', date.calendar_day)
+        //     return date
+
+        // })
+        // console.log('correctedDates', correctedDates)
+
+
+        console.log('dayjs().format()', dayjs().format())
+
         console.log('checkedDates', checkedDates)
-        const correctedDates = checkedDates.map((date, i) => {
-            console.log('date.calendar_day', date.calendar_day)
-            console.log('date.checked', date.checked)
-             let temp = dayjs(date.calendar_day).startOf('day').utc().format();
-             date.calendar_day = temp
-            console.log('date.calendar_day', date.calendar_day)
-            return date
-
-        })
-        console.log('correctedDates', correctedDates)
-
         return checkedDates.map((date, i) =>
             (
                 <div className="day-option" key={date.calendar_day}
@@ -384,19 +394,44 @@ const HabitCard = props => {
                         {/* <input onClick={() => handleSelectDay(i)}  */}
                         <input onClick={() => toggleDateCompleted(i, habitID)}
                             type={"checkbox"}
-                            id={'' + habitID + '' + i} value={dayjs(date.calendar_day).format('ddd')}
+                            id={'' + habitID + '' + i} value={dayjs().subtract(6-i,'day').format('YYYY-MM-DD')}
                             defaultChecked={date.checked}
                         />
 
                         <div className="day-label-info-container">
-                            <p className="day-name">{dayjs(date.calendar_day).format('ddd')}</p>
-                            <p className="day-number">{dayjs(date.calendar_day).format('DD')}</p>
+                            <p className="day-name">{dayjs().subtract(6-i,'day').format('ddd')}</p>
+                            <p className="day-number">{dayjs().subtract(6-i,'day').format('DD')}</p>
                         </div>
                     </label>
                 </div>
             )
         )
     }
+    //     return checkedDates.map((date, i) =>
+    //         (
+    //             <div className="day-option" key={date.calendar_day}
+    //                 style={{ animation: `fadeIn ${i / 4}s` }}
+    //             >
+    //                 <label
+    //                     htmlFor={'' + habitID + '' + i}
+    //                     className="day-label"
+    //                 >
+    //                     {/* <input onClick={() => handleSelectDay(i)}  */}
+    //                     <input onClick={() => toggleDateCompleted(i, habitID)}
+    //                         type={"checkbox"}
+    //                         id={'' + habitID + '' + i} value={dayjs(date.calendar_day).format('ddd')}
+    //                         defaultChecked={date.checked}
+    //                     />
+
+    //                     <div className="day-label-info-container">
+    //                         <p className="day-name">{dayjs(date.calendar_day).format('ddd')}</p>
+    //                         <p className="day-number">{dayjs(date.calendar_day).format('DD')}</p>
+    //                     </div>
+    //                 </label>
+    //             </div>
+    //         )
+    //     )
+    // }
     //     return daysNames.map((day, i) =>
     //         (
     //             <div className="day-option" key={day}
