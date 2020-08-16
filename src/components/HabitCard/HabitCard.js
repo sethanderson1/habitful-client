@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import dayjs, { isDayjs } from 'dayjs';
-import { ToastContainer, toast, cssTransition, Zoom } from 'react-toastify';
+import dayjs, { isDayjs, utc } from 'dayjs';
+import { ToastContainer, toast, cssTransition } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HabitContext } from '../../context/HabitContext';
 import HabitRecordsService from '../../service/habit-record-service';
@@ -10,10 +10,12 @@ import './HabitCard.css';
 
 const HabitCard = props => {
 
+    const habitID = props.id;
     const context = useContext(HabitContext)
     const { habitRecords, setHabitRecords } = context;
 
     const [selectedId, setSelectedId] = useState('');
+    const [checkedDates, setCheckedDates] = useState([])
 
     // const toastId = useRef(null);
 
@@ -140,6 +142,13 @@ const HabitCard = props => {
         }
     }
 
+
+
+
+
+
+
+
     const getDateSelected = (day) => {
         const dateSelected = dayjs()
             .subtract(numDaystoDisplay - 1 - day, 'days')
@@ -163,7 +172,7 @@ const HabitCard = props => {
 
     const postRecord = async (dateSelected) => {
         const newHabitRecord = {
-            habit_id: props.id,
+            habit_id: habitID,
             date_completed: dateSelected
         }
         try {
@@ -177,8 +186,32 @@ const HabitCard = props => {
     }
 
     const handleClickName = (name) => {
-        context.setHabitId(props.id)
+        context.setHabitId(habitID)
     }
+
+    // const isChecked = (props_id, i) => {
+
+    //     const recordExists = (props_id) => {
+    //         if (!habitRecords) {
+    //             return false;
+    //         }
+    //         // search thru habitRecords to see if the record exists
+    //         for (let j = 0; j < habitRecords.length; j++) {
+    //             if (habitRecords[j].habit_id === props_id
+    //                 && dayjs(actualDays[i])
+    //                     .isSame(dayjs(habitRecords[j].date_completed), 'day')
+    //             ) {
+    //                 return true;
+    //             }
+    //         }
+    //     }
+
+    //     if (recordExists(props_id)) {
+    //         return true;
+    //     }
+    // }
+
+
 
     const isChecked = (props_id, i) => {
 
@@ -202,6 +235,93 @@ const HabitCard = props => {
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+    // ensures that no duplicate toasts
+    const renderToastContainer = () => {
+        // console.log('renderToastContainer ran')
+        // console.log('habitID', habitID)
+        // console.log('selectedId', selectedId)
+
+        const toastToDisplay = habitID === selectedId
+            // const toastToDisplay = habitID === habitID
+            ? <ToastContainer limit={1} />
+            : null;
+
+        return toastToDisplay;
+    }
+
+    const randomFadeTime = (max, i) => {
+        // console.log('i', i)
+        const num = Math.random() * max;
+
+        // console.log('num', num)
+        return num.toString();
+    }
+
+    const fetchCheckedStatusForHabitID = async (startDate, endDate, habitID) => {
+
+        try {
+            const checkedStatusArray = await HabitRecordsService
+                .getCheckedStatusRange(startDate, endDate, habitID)
+            // convert checked dates to local dates
+            // convertCheckedDatesToLocal()
+            setCheckedDates(checkedStatusArray.data)
+            // console.log('checkedStatusArray', checkedStatusArray)
+        } catch (error) {
+            console.log('error', error)
+        }
+    }
+
+    const convertCheckedDatesToLocal = async () => {
+        console.log('convertCheckedDatesToLocal ran')
+
+        // if (checkedDates.length>0) {
+
+        const localizedCheckedDates = checkedDates.map(checkedDate => {
+            checkedDate.calendar_day = dayjs(checkedDate.calendar_day).format()
+            console.log('checkedDate.calendar_day', checkedDate.calendar_day)
+            return checkedDate.calendar_day
+        })
+
+        console.log('localizedCheckedDates', localizedCheckedDates)
+
+        // }
+
+
+
+
+
+    }
+
+    useEffect(() => {
+
+        if (checkedDates.length === 0) {
+
+            fetchCheckedStatusForHabitID(
+                dayjs().subtract(6, 'day')
+                    // .utc()
+                    .format('YYYY-MM-DD')
+                , dayjs()
+                    // .utc()
+                    .format('YYYY-MM-DD')
+                , habitID)
+
+        }
+        console.log('checkedDates', checkedDates)
+    }, [checkedDates])
+
+
+
     const handleSelectDay = async (day) => {
         console.log('handleSelectDay ran')
 
@@ -211,68 +331,105 @@ const HabitCard = props => {
 
         // if a user selects a date, then clicks again to unselect,
         // need to delete that date from the record
-        const isAlreadyChecked = isChecked(props.id, day);
+        const isAlreadyChecked = isChecked(habitID, day);
 
         if (isAlreadyChecked) {
-            await deleteRecord(await findIdxToDelete(props.id, dateSelected));
+            await deleteRecord(await findIdxToDelete(habitID, dateSelected));
             setHabitRecordsToContext();
-            setSelectedId(props.id);
-            successToastDelete(props.id, dateSelected);
+            setSelectedId(habitID);
+            successToastDelete(habitID, dateSelected);
         } else {
             await postRecord(dateSelected);
             setHabitRecordsToContext();
-            setSelectedId(props.id);
-            successToastPost(props.id, dateSelected);
+            setSelectedId(habitID);
+            successToastPost(habitID, dateSelected);
         }
     }
 
-    // ensures that no duplicate toasts
-    const renderToastContainer = () => {
-        const toastToDisplay = props.id === selectedId
-            ? <ToastContainer limit={1} />
-            : null;
+    const toggleDateCompleted = async (i, habitID) => {
+        loadingToast();
 
-        return toastToDisplay;
-    }
-
-    const randomFadeTime = (max, i) => {
-        console.log('i', i)
-        const num = Math.random() * max;
-
-        console.log('num', num)
-        return num.toString();
+        const date = dayjs().subtract(6 - i, 'day')
+            .format()
+        console.log('date', date)
+        try {
+            HabitRecordsService.toggleDate(date, habitID)
+        } catch (error) {
+            console.log('error', error)
+        }
     }
 
     function renderCheckMarkOptions() {
-        return daysNames.map((day, i) =>
+        console.log('checkedDates', checkedDates)
+        const correctedDates = checkedDates.map((date, i) => {
+            console.log('date.calendar_day', date.calendar_day)
+            console.log('date.checked', date.checked)
+             let temp = dayjs(date.calendar_day).startOf('day').utc().format();
+             date.calendar_day = temp
+            console.log('date.calendar_day', date.calendar_day)
+            return date
+
+        })
+        console.log('correctedDates', correctedDates)
+
+        return checkedDates.map((date, i) =>
             (
-                <div className="day-option" key={day}
+                <div className="day-option" key={date.calendar_day}
                     style={{ animation: `fadeIn ${i / 4}s` }}
                 >
                     <label
-                        htmlFor={'' + props.id + '' + i}
+                        htmlFor={'' + habitID + '' + i}
                         className="day-label"
                     >
-                        <input onClick={() => handleSelectDay(i)} type={"checkbox"}
-                            id={'' + props.id + '' + i} value={day}
-                            defaultChecked={isChecked(props.id, i)}
+                        {/* <input onClick={() => handleSelectDay(i)}  */}
+                        <input onClick={() => toggleDateCompleted(i, habitID)}
+                            type={"checkbox"}
+                            id={'' + habitID + '' + i} value={dayjs(date.calendar_day).format('ddd')}
+                            defaultChecked={date.checked}
                         />
 
                         <div className="day-label-info-container">
-                            <p className="day-name">{day}</p>
-                            <p className="day-number">{daysNums[i]}</p>
+                            <p className="day-name">{dayjs(date.calendar_day).format('ddd')}</p>
+                            <p className="day-number">{dayjs(date.calendar_day).format('DD')}</p>
                         </div>
                     </label>
                 </div>
             )
         )
     }
+    //     return daysNames.map((day, i) =>
+    //         (
+    //             <div className="day-option" key={day}
+    //                 style={{ animation: `fadeIn ${i / 4}s` }}
+    //             >
+    //                 <label
+    //                     htmlFor={'' + habitID + '' + i}
+    //                     className="day-label"
+    //                 >
+    //                     {/* <input onClick={() => handleSelectDay(i)}  */}
+    //                     <input onClick={() => toggleDateCompleted(i, habitID)}
+    //                         type={"checkbox"}
+    //                         id={'' + habitID + '' + i} value={day}
+    //                         defaultChecked={checkedDates[i] &&
+    //                              convertCheckedDatesToLocal(checkedDates[i].checked)}
+    //                     // defaultChecked={isChecked(habitID, i)}
+    //                     />
+
+    //                     <div className="day-label-info-container">
+    //                         <p className="day-name">{day}</p>
+    //                         <p className="day-number">{daysNums[i]}</p>
+    //                     </div>
+    //                 </label>
+    //             </div>
+    //         )
+    //     )
+    // }
 
     return (
         <div className="habit-card-container">
-            {renderToastContainer(props.id)}
+            {renderToastContainer(habitID)}
             <div className="habit-card-wrapper" >
-                <Link to={`/habits/${props.id}/habit-data`}
+                <Link to={`/habits/${habitID}/habit-data`}
                     onClick={handleClickName}>
                     <p className="habit-card-name">{props.name}</p>
                 </Link>

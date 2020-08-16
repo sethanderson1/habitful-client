@@ -1,6 +1,5 @@
 import axios from 'axios';
 import config from '../config';
-import dayjs from 'dayjs';
 
 
 
@@ -8,7 +7,7 @@ export const normalizeAxiosError = (error) => {
     const status = error.response && error.response.status
     let msg = 'There was an error'
     let HTTPStatusCode = 'UNKNOWN'
-
+   
     if (status) {
         HTTPStatusCode = status
         switch (status) {
@@ -64,55 +63,6 @@ const HabitRecordsService = {
     //         console.log('err', err)
     //     }
     // },
-
-
-
-
-
-
-    async getCheckedStatusRange(startDate, endDate, habitID) {
-        try {
-            const url = `${config.API_ENDPOINT}/habit-matrix/${startDate}/${endDate}/${habitID}`
-            const res = await axios.get(url, await this.reqHeaders())
-            const resCheckedStatusRange = res.data;
-            console.log('resCheckedStatusRange', resCheckedStatusRange)
-            return resCheckedStatusRange;
-        } catch (error) {
-            console.log('error', error)
-        }
-    },
-
-
-
-
-// might need to return habit record id so that can see if null.
-    async toggleDate(date, habitID) {
-        // const localDate = dayjs(date).format('YYYY-MM-DD');
-        // console.log('localDate', localDate)
-        try {
-            const url = `${config.API_ENDPOINT}/habit-matrix/toggle/${date}/${habitID}`
-            const res = await axios.post(url
-                , habitID
-                , await this.reqHeaders())
-            const resToggle = res.data;
-            // console.log('resToggle', resToggle)
-            // return resToggle;
-        } catch (error) {
-            console.log('error', error)
-        }
-    },
-
-
-
-
-
-
-
-
-
-
-
-
     async postHabitRecord(newHabitRecord) {
         try {
             const url = `${config.API_ENDPOINT}/habit-records`

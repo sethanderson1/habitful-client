@@ -5,6 +5,8 @@ import dayjs from 'dayjs';
 import HabitsService from '../../service/habits-service';
 import HabitRecordsService from '../../service/habit-record-service';
 import './HabitProgressPage.css';
+const utc = require('dayjs/plugin/utc');
+dayjs.extend(utc);
 
 const HabitProgressPage = (props) => {
 
@@ -59,6 +61,7 @@ const HabitProgressPage = (props) => {
         }
 
         if (habitRecords) {
+            // console.log('habitRecords', habitRecords)
             chart();
             doughnutChart();
         } else {
@@ -152,7 +155,7 @@ const HabitProgressPage = (props) => {
 
 
             return () => {
-                console.log('CLEAR SCROLL TIMER')
+                // console.log('CLEAR SCROLL TIMER')
                 window.clearTimeout(timer)
             }
 
@@ -169,16 +172,21 @@ const HabitProgressPage = (props) => {
             record.habit_id === habit_id)
             .map(record => record.date_completed);
         arr.sort((a, b) => dayjs(a) - dayjs(b));
+        // console.log('habitRecords', habitRecords)
+        // console.log('arr', arr)
 
         // length of graph x axis
         const interval = Math.max(dayjs()
             .diff(dayjs(arr[0]), 'days') + 2, 30);
 
+
         setGraphInterval(interval)
 
         // make array of dates with null or 0 if no date
         const startDate = dayjs(endDate)
-            .subtract(interval, 'days').format();
+            .subtract(interval, 'days')
+            // .utc()
+            .format();
         let currDay = startDate;
 
         let filledRecords = [{
@@ -190,12 +198,23 @@ const HabitProgressPage = (props) => {
 
         // make array of dates where 0 represents
         // a non-completion day ie [7/1/20, 0, 0, 7/4/20]
-        while (dayjs(currDay).diff(dayjs(endDate), 'day') <= 0) {
+        while (dayjs(currDay)
+            // .utc()
+            .diff(dayjs(endDate)
+                // .utc()
+                , 'day') <= 0) {
             if (arr[i] === undefined) {
                 arr[i] = null;
             }
 
-            if (dayjs(currDay).isSame(dayjs(arr[i]), 'day')) {
+            // console.log('dayjs(currDay).utc()', dayjs(currDay).utc().format())
+            // console.log('dayjs(currDay)', dayjs(currDay))
+            // console.log('dayjs(arr[i])', dayjs(arr[i]).utc().format())
+            if (dayjs(currDay)
+                .utc()
+                .isSame(dayjs(arr[i])
+                    // .utc()
+                    , 'day')) {
                 filledRecords[0].datesWithGaps
                     .push(currDay)
                 i++;
@@ -203,7 +222,10 @@ const HabitProgressPage = (props) => {
                 filledRecords[0].datesWithGaps
                     .push(0);
             }
-            currDay = dayjs(currDay).add(1, 'day');
+            currDay = dayjs(currDay)
+                // .utc()
+                .add(1, 'day');
+            // console.log('currDay', currDay)
         }
 
         const graphResInc = graphResolutionIncrement();

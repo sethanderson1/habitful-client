@@ -36,7 +36,8 @@ const App = () => {
       await axios.get(url)
     }
 
-    warmUpPing();
+    // todo: 
+    // warmUpPing();
 
 
 
