@@ -21,26 +21,12 @@ const HabitRecordsService = {
             return resHabitRecords;
         } catch (err) {
             const normalizedError = normalizeAxiosError(err)
-            console.log('normalizedError', normalizedError)
-            console.log('err', err)
             return normalizedError
         }
     },
-    // async getHabitRecordsByHabitId() {
-    //     try {
-    //         const url = `${config.API_ENDPOINT}/habit-records`
-    //         const res = await axios.get(url, await this.reqHeaders())
-    //         const resHabitRecords = res.data;
-    //         return resHabitRecords;
-    //     } catch (err) {
-    //         console.log('err', err)
-    //     }
-    // },
     async postHabitRecord(newHabitRecord) {
         console.log('HabitsRecordsService.postHabitRecord() ran')
         try {
-            // todo: change back just testing
-            // const url = `${config.API_ENDPOINT}/invalid-route`
             const url = `${config.API_ENDPOINT}/habit-records`
             const res = await axios
                 .post(url, newHabitRecord, await this.reqHeaders())
@@ -53,17 +39,13 @@ const HabitRecordsService = {
     },
     async deleteHabitRecord(id) {
         try {
-            // todo: change back just testing
-            // const url = `${config.API_ENDPOINT}/invalid-route`
             const url = `${config.API_ENDPOINT}/habit-records/record/${id}`
             const res = await axios.delete(url, await this.reqHeaders())
             const resDeletedRecord = res;
             console.log('resDeletedRecord', resDeletedRecord)
             return resDeletedRecord;
         } catch (err) {
-            console.log('err', err)
             const normalizedError = normalizeAxiosError(err)
-            console.log('normalizedError', normalizedError)
             return normalizedError
         }
     }

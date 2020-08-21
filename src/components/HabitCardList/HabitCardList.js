@@ -1,18 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
-// import axios from 'axios';
-// import dayjs from 'dayjs';
-// import config from '../../config';
+import React, { useEffect, useContext } from 'react';
 import HabitCard from '../HabitCard/HabitCard';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HabitContext } from '../../context/HabitContext';
 import HabitRecordsService from '../../service/habit-record-service';
 import HabitsService from '../../service/habits-service';
 import './HabitCardList.css';
-// import { getNodeText } from '@testing-library/react';
 
 const HabitCardList = (props) => {
-    // console.log('HabitCardList ran')
     const context = useContext(HabitContext)
 
     const { habits, setHabits, setHabitRecords, setErrorInContext } = context;
@@ -46,16 +41,12 @@ const HabitCardList = (props) => {
         }
     }
     const getHabitRecords = async () => {
-        // console.log('getHabitRecords ran')
         try {
             const resHabitRecords = await HabitRecordsService
                 .getHabitRecords();
-            // console.log('resHabitRecords', resHabitRecords)
             return resHabitRecords;
         } catch (error) {
             setErrorInContext(error)
-
-            console.log('error', error)
         }
     }
     const updateHabitRecordsInContext = async () => {
@@ -64,8 +55,6 @@ const HabitCardList = (props) => {
             setHabitRecords(resHabitRecords);
         } catch (error) {
             setErrorInContext(error)
-
-            console.log('error', error)
         }
     }
 

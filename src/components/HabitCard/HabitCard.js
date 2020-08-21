@@ -37,7 +37,6 @@ const HabitCard = props => {
     })
 
     const loadingToast = async () => {
-        // console.log('loadingToast ran')
         toast.info(`loading...`, {
             position: toast.POSITION.BOTTOM_CENTER,
             autoClose: false,
@@ -46,7 +45,6 @@ const HabitCard = props => {
     }
 
     const handleError = () => {
-        // console.log('handleError ran')
         toast.clearWaitingQueue();
         toast.dismiss();
         toast.error(`something went wrong, please try again`, {
@@ -77,7 +75,6 @@ const HabitCard = props => {
                 })
             }
         } catch (error) {
-            // console.log('successToastPost error', error)
             setErrorInContext(error)
         }
     }
@@ -89,19 +86,16 @@ const HabitCard = props => {
             if (!resHabitRecords) handleError()
             return resHabitRecords;
         } catch (err) {
-            // console.log('err', err)
             handleError();
         }
     }
 
     const deleteRecord = async (idx) => {
-        // console.log('deleteRecord ran')
         try {
             const resDeleted = await HabitRecordsService
                 .deleteHabitRecord(habitRecords[idx].id)
             return resDeleted;
         } catch (error) {
-            // console.log('deleteRecord error', error)
             setErrorInContext(error);
         }
     }
@@ -144,7 +138,7 @@ const HabitCard = props => {
                         .isSame(dayjs(record.date_completed), 'day')
             })) {
                 return true
-            } 
+            }
         }
 
         if (recordExists(props_id)) {
@@ -153,7 +147,6 @@ const HabitCard = props => {
     }
 
     const postRecord = async (dateSelected) => {
-        // console.log('postRecord ran')
         const newHabitRecord = {
             habit_id: props.id,
             date_completed: dateSelected
@@ -163,7 +156,6 @@ const HabitCard = props => {
                 .postHabitRecord(newHabitRecord);
             return resHabitRecords;
         } catch (err) {
-            // console.log('err', err)
             handleError();
         }
     }

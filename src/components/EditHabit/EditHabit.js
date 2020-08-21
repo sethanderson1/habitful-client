@@ -1,21 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import './EditHabit.css';
-// import TextareaAutosize from 'react-textarea-autosize';
 import HabitsService from '../../service/habits-service';
-import { HabitContext } from '../../context/HabitContext';
 import ValidationError from '../ValidationError/ValidationError';
 
 
-// todo: do a delete habit link in red like in recipe repo
 function EditHabit(props) {
-    // todo: make sure validation error if no name
-    const context = useContext(HabitContext);
-    const { habits } = context;
-    // const habitId = +props.match && +props.match.params.habit_id;
     const habitId = +props.match.params.habit_id;
-
-    const nameInitValue = habits && habits.name;
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -23,7 +14,6 @@ function EditHabit(props) {
     const [timeInterval, setTimeInterval] = useState('week');
 
     useEffect(() => {
-
         const getHabit = async () => {
             const resHabit = await HabitsService
                 .getHabitById(habitId)
@@ -100,15 +90,6 @@ function EditHabit(props) {
         props.history.push(`/habits/${habitId}/habit-data`)
     };
 
-    // function toggleHoverClass() {
-    //     if (name.length !== 0) {
-    //         return ['EditHabit__submit', 'allowHover'].join(' ')
-    //     } else {
-    //         return 'EditHabit__submit'
-
-    //     };
-    // };
-
     const handleChangeName = (e) => {
         setName(e.target.value)
         return e.target.value
@@ -153,7 +134,6 @@ function EditHabit(props) {
                             />
                         </div>
                         <ValidationError
-                            // className='accent-color'
                             message={validateName()}
                             errorPosition={'relative'}
                         />
@@ -204,25 +184,22 @@ function EditHabit(props) {
                                 type="button"
                                 onClick={handleCancel}>Cancel</button>
                             <button
-                                // className={toggleHoverClass()}
                                 type="submit"
                                 disabled={name.length === 0}
                             >Save</button>
                         </div>
                         <br />
                     </form>
-                    {/* will style this button as a red link  */}
-                    {/* <button onClick={handleDelete}>Delete</button> */}
                     <button
-                                    className='btn delete-button'
-                                    aria-label='delete-button'
-                                    onClick={() => {
-                                        if (window.confirm('Are you sure you wish to delete this habit?')) {
-                                            handleDelete()
-                                        }
-                                    }}
-                                >
-                                    Delete Habit
+                        className='btn delete-button'
+                        aria-label='delete-button'
+                        onClick={() => {
+                            if (window.confirm('Are you sure you want to delete this habit?')) {
+                                handleDelete()
+                            }
+                        }}
+                    >
+                        Delete Habit
                         </button>
                 </fieldset>
             </div>

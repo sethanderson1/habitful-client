@@ -80,7 +80,7 @@
 
 @media only screen and (min-width: 768px) {
     .LandingPage-main-container {
-        margin: 0 10%;   
+        margin: 0 auto;   
     }
     .LandingPage-app-title {
         font-size: 4rem;

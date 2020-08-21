@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
-// import TextareaAutosize from 'react-textarea-autosize';
 import HabitsService from '../../service/habits-service';
 import ValidationError from '../ValidationError/ValidationError';
 import './AddHabit.css';
 
 function AddHabit(props) {
-    // todo: make sure validation error if no name
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [numTimes, setNumTimes] = useState(7);
     const [timeInterval, setTimeInterval] = useState('week');
 
     function handleCancel() {
-        // console.log('handleCancel ran')
         props.history.goBack();
     }
 
@@ -68,8 +65,6 @@ function AddHabit(props) {
         props.history.goBack();
     };
 
-
-
     const handleChangeName = (e) => {
         setName(e.target.value)
         return e.target.value
@@ -89,14 +84,6 @@ function AddHabit(props) {
         setTimeInterval(e.target.value)
         return e.target.value
     }
-
-    // function toggleHoverClass() {
-    //     if (name.length !== 0) {
-    //         return ['add-habit-submit', 'allowHover'].join(' ')
-    //     } else {
-    //         return 'add-habit-submit'
-    //     };
-    // };
 
     return (
         <section className="add-habit-outer-wrapper">
@@ -173,7 +160,6 @@ function AddHabit(props) {
                                 type="button"
                                 onClick={handleCancel}>Cancel</button>
                             <button
-                                // className={toggleHoverClass()}
                                 type="submit"
                                 disabled={name.length === 0}
                             >Add</button>

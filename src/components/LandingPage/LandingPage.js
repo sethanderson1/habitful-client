@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { HabitContext } from '../../context/HabitContext';
+import React from 'react';
 import select_date from './select_date.png';
 import select_title from './select_title.png';
 import graph_page from './graph_page.png';
@@ -8,17 +7,11 @@ import './LandingPage.css';
 
 function LandingPage(props) {
 
-
-    const context = useContext(HabitContext);
-    const { isLoggedIn, setIsLoggedIn } = context;
-
     async function handleClickSignUp() {
-        // await context.handleLogout();
         props.history.push('/signup');
     };
 
     async function handleClickLogin() {
-        // await context.handleLogout();
         props.history.push('/login');
     };
 

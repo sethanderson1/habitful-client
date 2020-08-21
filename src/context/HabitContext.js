@@ -12,27 +12,6 @@ export const HabitContextProvider = props => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [errorInContext, setErrorInContext] = useState(null);
 
-    // checkBeforeAnything = () => {
-    //     const authToken = localStorage.getItem('authToken');
-    //     if (!authToken) {
-    //       return (
-    //         <Redirect to={'/'} />
-    //       )
-    //     };
-    //   };
-
-    // const displayError = () => {
-    //     if (errorInContext) {
-    //         return (
-    //             <section>
-    //                 <h1>{JSON.stringify(errorInContext)}</h1>
-    //             </section>
-    //         )
-    //     }
-    //     return null
-    // }
-
-
     return (
         <HabitContext.Provider value={{
             test,

@@ -21,8 +21,6 @@ const HabitsService = {
             return resHabits;
         } catch (err) {
             const normalizedError = normalizeAxiosError(err)
-            console.log('normalizedError', normalizedError)
-            console.log('err', err)
             return normalizedError
         }
     },
@@ -35,8 +33,6 @@ const HabitsService = {
             return resHabits;
         } catch (err) {
             const normalizedError = normalizeAxiosError(err)
-            console.log('normalizedError', normalizedError)
-            console.log('err', err)
             return normalizedError
         }
     },
@@ -49,9 +45,7 @@ const HabitsService = {
             return resHabit;
         } catch (err) {
             const normalizedError = normalizeAxiosError(err)
-            
-            console.log('normalizedError', normalizedError)
-            console.log('err', err)
+
             return normalizedError
         }
     },
@@ -64,8 +58,6 @@ const HabitsService = {
             return updatedHabit;
         } catch (err) {
             const normalizedError = normalizeAxiosError(err)
-            console.log('normalizedError', normalizedError)
-            console.log('err', err)
             return normalizedError
         }
     },
@@ -76,8 +68,6 @@ const HabitsService = {
                 .delete(url, await this.reqHeaders())
         } catch (err) {
             const normalizedError = normalizeAxiosError(err)
-            console.log('normalizedError', normalizedError)
-            console.log('err', err)
             return normalizedError
         }
     }
