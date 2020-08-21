@@ -23,7 +23,6 @@ dayjs.extend(utc);
 
 const App = () => {
 
-
   const context = useContext(HabitContext);
   const { isLoggedIn, setIsLoggedIn } = context;
   useEffect(() => {
@@ -31,10 +30,8 @@ const App = () => {
     // do warm up ping to wake up heroku 
     // upon first arriving to page
     const warmUpPing = async () => {
-      // console.log('warmUpPing ran')
       const url = `${config.API_ENDPOINT}/ping`
       const res = await axios.get(url)
-      // console.log('res', res)
     }
 
     warmUpPing();
@@ -49,33 +46,7 @@ const App = () => {
 
   }, [isLoggedIn])
 
-  // function loginRoute() {
-  //   console.log('isLoggedIn', isLoggedIn)
-  //   if (!isLoggedIn) {
-  //     return (
-  //       <Redirect to={'/'} />
-  //     )
-  //   } else {
-  //     return (
-  //       <Route
-  //         exact
-  //         path={'/login'}
-  //         component={Login}
-  //       />
-  //     )
-  //   }
-  // }
-
-  // function loginPath() {
-  //   if (!isLoggedIn) {
-  //     return '/'
-  //   } else {
-  //     return '/login'
-  //   }
-  // }
-
-  
-  function loginComponent() {
+   function loginComponent() {
     if (isLoggedIn) {
       return LandingPage
     } else {
