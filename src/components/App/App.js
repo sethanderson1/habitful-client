@@ -30,10 +30,10 @@ const App = () => {
     // do warm up ping to wake up heroku 
     // upon first arriving to page
     const warmUpPing = async () => {
-      console.log('warmUpPing ran')
+      // console.log('warmUpPing ran')
       const url = `${config.API_ENDPOINT}/ping`
       const res = await axios.get(url)
-      console.log('res', res)
+      // console.log('res', res)
     }
 
     warmUpPing();

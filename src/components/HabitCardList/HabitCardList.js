@@ -15,7 +15,7 @@ const HabitCardList = (props) => {
     // console.log('HabitCardList ran')
     const context = useContext(HabitContext)
 
-    const { habits, setHabits, habitRecords, setHabitRecords } = context;
+    const { habits, setHabits, setHabitRecords } = context;
 
     useEffect(() => {
         console.log('useEffect in HabitCardList ran')
@@ -24,28 +24,41 @@ const HabitCardList = (props) => {
         updateHabitRecordsInContext();
     }, [])
 
+
     const getHabits = async () => {
         try {
             const resHabits = await HabitsService.getHabits();
             return resHabits;
-        } catch (err) {
-            console.log('err', err)
+        } catch (error) {
+            console.log('error', error)
         }
     }
     const updateHabitsInContext = async () => {
-        const resHabits = await getHabits();
-        setHabits(resHabits);
+        try {
+            const resHabits = await getHabits();
+            setHabits(resHabits);
+        } catch (error) {
+            console.log('error', error)
+        }
     }
     const getHabitRecords = async () => {
-        console.log('getHabitRecords ran')
-
-        const resHabitRecords = await HabitRecordsService
-            .getHabitRecords();
-        return resHabitRecords;
+        // console.log('getHabitRecords ran')
+        try {
+            const resHabitRecords = await HabitRecordsService
+                .getHabitRecords();
+            // console.log('resHabitRecords', resHabitRecords)
+            return resHabitRecords;
+        } catch (error) {
+            console.log('error', error)
+        }
     }
     const updateHabitRecordsInContext = async () => {
-        const resHabitRecords = await getHabitRecords();
-        setHabitRecords(resHabitRecords);
+        try {
+            const resHabitRecords = await getHabitRecords();
+            setHabitRecords(resHabitRecords);
+        } catch (error) {
+            console.log('error', error)
+        }
     }
 
     const habitCards = habits && habits.map(habit => {

@@ -136,7 +136,7 @@ const HabitCard = props => {
             if (!resHabitRecords) handleError()
             return resHabitRecords;
         } catch (err) {
-            // handleError();
+            handleError();
         }
     }
 
