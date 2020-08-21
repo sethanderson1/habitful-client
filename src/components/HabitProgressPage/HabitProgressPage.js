@@ -15,7 +15,7 @@ const HabitProgressPage = (props) => {
     const [currHabitStrength, setCurrHabitStrength] = useState(0);
     const [name, setName] = useState(' ');
     const [description, setDescription] = useState('');
-    // big number so forces to 0 instead of random number
+    // big number so forces to 0 instead of random number 
     const [numTimes, setNumTimes] = useState(10000000000);
     const [timeInterval, setTimeInterval] = useState('week');
     const [graphResolution, setGraphResolution] = useState('day');
@@ -25,13 +25,13 @@ const HabitProgressPage = (props) => {
     });
     const graphContainerRef = useRef(null);
     const graphWrapperRef = useRef(null);
-    const canvasRefMaybe = useRef(null);
+    const canvasRef = useRef(null);
 
     const endDate = dayjs().format();
 
     const context = useContext(HabitContext);
-    const { habitId, setHabitId,
-        habitRecords, setHabitRecords } = context;
+    const { setHabitId, habitRecords,
+        setHabitRecords, setErrorInContext } = context;
 
     const habit_id = +props.match.params.habit_id;
 
@@ -39,21 +39,29 @@ const HabitProgressPage = (props) => {
         toast.clearWaitingQueue();
         toast.dismiss();
         const getHabit = async () => {
-            const resHabit = await HabitsService
-                .getHabitById(habit_id)
-            setName(resHabit.name);
-            setDescription(resHabit.description);
-            setNumTimes(resHabit.num_times);
-            setTimeInterval(resHabit.time_interval);
-            setHabitId(habit_id)
+            try {
+                const resHabit = await HabitsService
+                    .getHabitById(habit_id);
+                setName(resHabit.name);
+                setDescription(resHabit.description);
+                setNumTimes(resHabit.num_times);
+                setTimeInterval(resHabit.time_interval);
+                setHabitId(habit_id);
+            } catch (error) {
+                setErrorInContext(error);
+            }
         }
 
         getHabit()
 
         const getRecords = async () => {
-            const resHabitRecords = await HabitRecordsService
-                .getHabitRecords();
-            return resHabitRecords;
+            try {
+                const resHabitRecords = await HabitRecordsService
+                    .getHabitRecords();
+                return resHabitRecords;
+            } catch (error) {
+                setErrorInContext(error);
+            }
         }
 
         const setHabitRecordsToContext = async () => {
@@ -66,25 +74,14 @@ const HabitProgressPage = (props) => {
         } else {
             setHabitRecordsToContext();
         }
-
     },
-        [
-            habitRecords,
-            graphResolution,
-            numTimes,
-            timeInterval,
-        ]
+        [habitRecords, graphResolution, numTimes, timeInterval,]
     );
 
 
     // scroll to the rightmost edge of the graph once it has rendered
+    // ie to most recent data
     useLayoutEffect(() => {
-        // console.log(`HabitProgressPage -> graphContainerRef`, graphContainerRef)
-
-
-
-
-
         if (graphContainerRef && graphContainerRef.current) {
 
             const timer = window.setTimeout(() => {
@@ -94,55 +91,20 @@ const HabitProgressPage = (props) => {
                 }
             }, 100)
 
+            // sets graph length based on amount of data and screen size
             const getGraphLength = () => {
-                // console.log('getGraphLength ran')
-                // todo: get this function to fill width of parent div
-                // if user only has little data ( ie when they first start out)
-                // console.log('graphInterval', graphInterval)
                 const graphLength =
                     graphInterval * 10 / graphResolutionIncrement();
-                // console.log('graphLength', graphLength)
 
-                // let graphLen = "100vw"
-
-                // if graphLen is small, 
-                // set canvas width to window width 
-                // so, Math.max(graphLen, window width)
                 const domElement = graphContainerRef.current;
-                const domElementGraphWrap = graphWrapperRef.current;
-                const domElementCanvas = canvasRefMaybe.current;
-                // console.log('domElementCanvas', domElementCanvas)
-                // console.log('domElementGraphWrap', domElementGraphWrap)
-
-
-                // may need to track resize event
-                // const graphContainerWidth = domElement.scrollWidth;
-                // const graphWrapperWidth = domElementGraphWrap.scrollWidth;
                 const graphContainerWidth = domElement.clientWidth;
-                // const graphWrapperWidth = domElementGraphWrap.clientWidth;
-                // const graphCanvasWidth = domElementCanvas.clientWidth;
-                // const graphCanvasWidth = domElementCanvas.chartInstance.width;
-                // console.log('graphCanvasWidth', graphCanvasWidth)
 
-
+                // this prevents graph from not filling width of page on render
                 const graphLen = Math.max(graphLength, graphContainerWidth);
-                // console.log('graphWrapperWidth', graphWrapperWidth)
-                // console.log('graphContainerWidth', graphContainerWidth)
-
-                // domElement.scrollLeft = domElement.scrollWidth;
-                // domElement.scrollLeft = 100000;
-                // console.log('domElement.scrollLeft', domElement.scrollLeft)
-                // console.log('domElement.scrollWidth', domElement.scrollWidth)
-                // console.log('domElement', domElement)
-                // console.log('domElement.clientWidth', domElement.clientWidth)
-
-
-                // console.log('graphLen', graphLen)
                 return graphLen;
             }
 
             const graphLen = getGraphLength()
-            // console.log('graphLen', graphLen)
 
             setGraphWrapperStyle({
                 // - 10 prevents unnecessary scroll bar space
@@ -151,21 +113,14 @@ const HabitProgressPage = (props) => {
                 position: "relative",
             })
 
-
-
             return () => {
-                console.log('CLEAR SCROLL TIMER')
                 window.clearTimeout(timer)
             }
-
         }
-
     }, [graphInterval, graphResolution])
 
-
+    // creates datapoints to populate graph with
     const dataForChart = () => {
-        // console.log('dataForChart ran')
-
         // sorted array of correct habit records
         let arr = habitRecords.filter(record =>
             record.habit_id === habit_id)
@@ -178,7 +133,6 @@ const HabitProgressPage = (props) => {
 
         setGraphInterval(interval)
 
-        // make array of dates with null or 0 if no date
         const startDate = dayjs(endDate)
             .subtract(interval, 'days').format();
         let currDay = startDate;
@@ -209,7 +163,6 @@ const HabitProgressPage = (props) => {
         }
 
         const graphResInc = graphResolutionIncrement();
-        // console.log('graphResInc', graphResInc)
 
         const { dailyData, currDataPoint }
             = makeDailyHabitStrengthData(filledRecords, interval);
@@ -235,14 +188,12 @@ const HabitProgressPage = (props) => {
     }
 
     const graphResolutionIncrement = () => {
-
         if (graphResolution === 'day') {
             return 1;
         } else if (graphResolution === 'week') {
             return 7;
         }
     }
-
 
     const makeDailyHabitStrengthData = (filledRecords, interval) => {
         let dailyData = [];
@@ -254,8 +205,6 @@ const HabitProgressPage = (props) => {
         } else if (timeInterval === 'month') {
             timeIntervalNum = 30;
         }
-
-        // creates dailyData array
 
         const freq = numTimes / timeIntervalNum;
 
@@ -279,8 +228,6 @@ const HabitProgressPage = (props) => {
             dailyData.push(100 * currDataPoint);
         }
         currDataPoint = 100 * currDataPoint;
-
-
         return { dailyData, currDataPoint }
     }
 
@@ -298,8 +245,6 @@ const HabitProgressPage = (props) => {
                     },
                     backgroundColor: [
                         '#037dff55'
-                        // '#ff9d71aa'
-                        // '#FF863188'
                     ],
                     borderWidth: 1,
                     pointRadius: 2,
@@ -331,39 +276,19 @@ const HabitProgressPage = (props) => {
                     ],
                     borderWidth: 1,
                     borderColor: 'rgba(255,255,255,0)',
-
                 }
             ]
         })
     }
 
     const handleGraphResolution = (e) => {
-        setGraphResolution(e.target.value)
-
+        setGraphResolution(e.target.value);
         return e.target.value
     }
 
-
-
-
-
-
-
-    // }, [graphInterval, graphResolution])
-
-
-
-
-
-
-
-
-
     const renderGraphResolutionOptions = () => {
 
-        return ['day', 'week'
-            // , 'month'
-        ].map(timeResolution => (
+        return ['day', 'week'].map(timeResolution => (
             <option
                 key={timeResolution}
                 id={timeResolution}
@@ -373,7 +298,6 @@ const HabitProgressPage = (props) => {
             </option>
         ))
     }
-
 
     return (
 
@@ -387,7 +311,6 @@ const HabitProgressPage = (props) => {
                 </p>
             </div>
 
-
             <div className="habit-strength-wrapper">
                 <div className="habit-strength-score card">
                     <p className="habit-indicator">Your Habit Strength is currently </p>
@@ -399,13 +322,11 @@ const HabitProgressPage = (props) => {
                         options={{
                             responsive: true,
                             // maintainAspectRatio: false,
-
                         }} />
                 </div>
             </div>
 
             <div className='graph-container-wrapper'>
-
                 <div className="time-interval-selector">
                     <label
                         htmlFor='view-type'>
@@ -423,7 +344,7 @@ const HabitProgressPage = (props) => {
                 <div ref={graphContainerRef} className='graph-container bottom-card'>
                     <div ref={graphWrapperRef} className="graph-wrapper" style={graphWrapperStyle} >
                         <Line
-                            ref={canvasRefMaybe}
+                            ref={canvasRef}
                             className="line-chart" data={chartData} options={{
                                 responsive: true,
                                 maintainAspectRatio: false,
