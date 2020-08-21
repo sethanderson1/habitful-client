@@ -1,68 +1,97 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Habitful
 
-## Available Scripts
+## Live App
+https://habitful-client.vercel.app/
 
-In the project directory, you can run:
+## API Interface:
+ [Habitful API](https://github.com/sethanderson1/habitful-api/)
+ 
+## Summary
+Use Habitful to track your progress on your habit goals
 
-### `npm start`
+## Screenshots
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Desktop View
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Landing Page
+![d-landing-page](https://user-images.githubusercontent.com/58465744/90896260-2e43d700-e378-11ea-9e4b-5a34c7034264.png)
 
-### `npm test`
+- SignUp Page
+![d-signup](https://user-images.githubusercontent.com/58465744/86298885-b3e6aa00-bbb3-11ea-8e3d-54bdebd99fdd.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Login Page
+![d-login](https://user-images.githubusercontent.com/58465744/86298890-b517d700-bbb3-11ea-99f1-262ac4c03b83.png)
 
-### `npm run build`
+- Categories Page
+![d-categoriesPage](https://user-images.githubusercontent.com/58465744/86298887-b47f4080-bbb3-11ea-85a2-2e46c1ac4841.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Add Categories Page
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+![d-addcategory](https://user-images.githubusercontent.com/58465744/86298886-b47f4080-bbb3-11ea-8583-13b4ab0bcc71.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Recipes List Page
 
-### `npm run eject`
+![recipe_list_desktop](https://user-images.githubusercontent.com/58465744/86298883-b3e6aa00-bbb3-11ea-9e77-c8fce9ea4a17.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Add Recipes Page
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![2020-07-01 16_06_11-Recipe Repo](https://user-images.githubusercontent.com/58465744/86299327-d2997080-bbb4-11ea-9737-be9c92b40a31.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Recipe Page
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![d-recipe1](https://user-images.githubusercontent.com/58465744/86298865-b1845000-bbb3-11ea-97c7-1349940c85a0.png)
+![d-recipe2](https://user-images.githubusercontent.com/58465744/86298869-b1845000-bbb3-11ea-934a-51a608d6b309.png)
 
-## Learn More
+- Edit Recipe Page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![d-edit-recipe1](https://user-images.githubusercontent.com/58465744/86298888-b47f4080-bbb3-11ea-9ed6-1fa78e7cb351.png)
+![d-edit-recipe2](https://user-images.githubusercontent.com/58465744/86298889-b517d700-bbb3-11ea-8938-7018a5e894d5.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### Mobile View
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- Landing Page
 
-### Analyzing the Bundle Size
+![m-landing](https://user-images.githubusercontent.com/58465744/86298878-b2b57d00-bbb3-11ea-9b09-814666c0fb9c.jpg)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- SignUp Page
 
-### Making a Progressive Web App
+![2020-07-01 16_08_54-Recipe Repo](https://user-images.githubusercontent.com/58465744/86299514-52273f80-bbb5-11ea-95b7-ce168029b554.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- Login Page
 
-### Advanced Configuration
+![2020-07-01 16_08_54-Recipe Repo](https://user-images.githubusercontent.com/58465744/86299514-52273f80-bbb5-11ea-95b7-ce168029b554.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+- Categories Page
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+![m-categories1](https://user-images.githubusercontent.com/58465744/86298874-b2b57d00-bbb3-11ea-87a0-79aa3477fe1c.jpg)
 
-### `npm run build` fails to minify
+- Add Categories Page
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![m-add-category](https://user-images.githubusercontent.com/58465744/86298884-b3e6aa00-bbb3-11ea-9c29-de366135e6eb.jpg)
+
+- Recipes List Page
+
+![m-recipes-list1](https://user-images.githubusercontent.com/58465744/86298882-b34e1380-bbb3-11ea-88ba-b03a601d765f.jpg)
+
+- Add Recipes Page
+
+![m-add-recipe1](https://user-images.githubusercontent.com/58465744/86298872-b21ce680-bbb3-11ea-9fb0-b24a9bbba4b0.jpg)
+
+- Recipe Page
+
+![m-recipe1](https://user-images.githubusercontent.com/58465744/86298879-b34e1380-bbb3-11ea-9cb6-94332962eeb3.jpg)
+![m-recipe2](https://user-images.githubusercontent.com/58465744/86298881-b34e1380-bbb3-11ea-9fdc-bed9d7d01804.jpg)
+
+- Edit Recipe Page
+
+![m-edit-recipe1](https://user-images.githubusercontent.com/58465744/86298875-b2b57d00-bbb3-11ea-9b07-e611a3242660.jpg)
+![m-edit-recipe2](https://user-images.githubusercontent.com/58465744/86298877-b2b57d00-bbb3-11ea-9754-68bbde1c6da2.jpg)
+
+
+## Technology Used
+- React
+- Node
+- Express
+- Postgres
