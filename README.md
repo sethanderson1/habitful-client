@@ -19,31 +19,27 @@ Use Habitful to track your progress on your habit goals
 
 - SignUp Page
 
+![d-signup](https://user-images.githubusercontent.com/58465744/90897096-87603a80-e379-11ea-904d-d83e839672ae.png)
+
 - Login Page
+
+![d-login](https://user-images.githubusercontent.com/58465744/90897099-87f8d100-e379-11ea-87d5-8dd91d086a86.png)
 
 - My Habits Page
 
-- Add Categories Page
+![d-myhabits](https://user-images.githubusercontent.com/58465744/90897103-87f8d100-e379-11ea-97a3-ef46a6317e6a.png)
 
-![d-addcategory](https://user-images.githubusercontent.com/58465744/86298886-b47f4080-bbb3-11ea-8583-13b4ab0bcc71.png)
+- Habit Progress Page
 
-- Recipes List Page
+![d-graph](https://user-images.githubusercontent.com/58465744/90897094-86c7a400-e379-11ea-944e-c8adbf32e3fd.png)
 
-![recipe_list_desktop](https://user-images.githubusercontent.com/58465744/86298883-b3e6aa00-bbb3-11ea-9e77-c8fce9ea4a17.png)
+- Add Habit Page
 
-- Add Recipes Page
+![d-addhabit](https://user-images.githubusercontent.com/58465744/90897090-862f0d80-e379-11ea-829b-c442452e195c.png)
 
-![2020-07-01 16_06_11-Recipe Repo](https://user-images.githubusercontent.com/58465744/86299327-d2997080-bbb4-11ea-9737-be9c92b40a31.png)
+- Edit Habit Page
 
-- Recipe Page
-
-![d-recipe1](https://user-images.githubusercontent.com/58465744/86298865-b1845000-bbb3-11ea-97c7-1349940c85a0.png)
-![d-recipe2](https://user-images.githubusercontent.com/58465744/86298869-b1845000-bbb3-11ea-934a-51a608d6b309.png)
-
-- Edit Recipe Page
-
-![d-edit-recipe1](https://user-images.githubusercontent.com/58465744/86298888-b47f4080-bbb3-11ea-9ed6-1fa78e7cb351.png)
-![d-edit-recipe2](https://user-images.githubusercontent.com/58465744/86298889-b517d700-bbb3-11ea-8938-7018a5e894d5.png)
+![d-edit](https://user-images.githubusercontent.com/58465744/90897620-461c5a80-e37a-11ea-9c36-05d3ffad33a8.png)
 
 
 ### Mobile View
@@ -52,41 +48,32 @@ Use Habitful to track your progress on your habit goals
 
 ![m-landing-page](https://user-images.githubusercontent.com/58465744/90896447-824ebb80-e378-11ea-976c-8899e2bfd651.png)
 
-
 - SignUp Page
 
-![2020-07-01 16_08_54-Recipe Repo](https://user-images.githubusercontent.com/58465744/86299514-52273f80-bbb5-11ea-95b7-ce168029b554.png)
+![m-signup](https://user-images.githubusercontent.com/58465744/90897098-87603a80-e379-11ea-9825-bbb4c6241a29.png)
 
 - Login Page
 
-![2020-07-01 16_08_54-Recipe Repo](https://user-images.githubusercontent.com/58465744/86299514-52273f80-bbb5-11ea-95b7-ce168029b554.png)
+![m-login](https://user-images.githubusercontent.com/58465744/90897101-87f8d100-e379-11ea-8a9e-aea5d7384fdd.png)
 
 
-- Categories Page
+- My Habits Page
 
-![m-categories1](https://user-images.githubusercontent.com/58465744/86298874-b2b57d00-bbb3-11ea-87a0-79aa3477fe1c.jpg)
+![m-myhabits](https://user-images.githubusercontent.com/58465744/90897106-88916780-e379-11ea-9158-9e1529fdeb6f.png)
 
-- Add Categories Page
+- Habit Progress Page
 
-![m-add-category](https://user-images.githubusercontent.com/58465744/86298884-b3e6aa00-bbb3-11ea-9c29-de366135e6eb.jpg)
+![m-graph](https://user-images.githubusercontent.com/58465744/90897095-87603a80-e379-11ea-9297-71f55e4719c8.png)
 
-- Recipes List Page
 
-![m-recipes-list1](https://user-images.githubusercontent.com/58465744/86298882-b34e1380-bbb3-11ea-88ba-b03a601d765f.jpg)
+- Add Habit Page
 
-- Add Recipes Page
+![m-addhabits](https://user-images.githubusercontent.com/58465744/90897092-86c7a400-e379-11ea-8270-effcb6dc2aac.png)
 
-![m-add-recipe1](https://user-images.githubusercontent.com/58465744/86298872-b21ce680-bbb3-11ea-9fb0-b24a9bbba4b0.jpg)
+- Edit Habit Page
 
-- Recipe Page
+![m-edit](https://user-images.githubusercontent.com/58465744/90897622-46b4f100-e37a-11ea-9386-9815aa0050eb.png)
 
-![m-recipe1](https://user-images.githubusercontent.com/58465744/86298879-b34e1380-bbb3-11ea-9cb6-94332962eeb3.jpg)
-![m-recipe2](https://user-images.githubusercontent.com/58465744/86298881-b34e1380-bbb3-11ea-9fdc-bed9d7d01804.jpg)
-
-- Edit Recipe Page
-
-![m-edit-recipe1](https://user-images.githubusercontent.com/58465744/86298875-b2b57d00-bbb3-11ea-9b07-e611a3242660.jpg)
-![m-edit-recipe2](https://user-images.githubusercontent.com/58465744/86298877-b2b57d00-bbb3-11ea-9754-68bbde1c6da2.jpg)
 
 
 ## Technology Used
