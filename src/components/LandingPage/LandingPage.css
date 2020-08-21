@@ -3,21 +3,49 @@
     max-width: 1000px ;
     margin:0 auto;
     animation: fadeIn 1s;
-
-
 }
 
 .LandingPage-app-title {
     font-family: "HKGrotesk-Bold", sans-serif;
     font-size: 3.5rem;
     color: #2d2d2d;
+    margin-bottom: 15vh;
 }
 
 .LandingPage-main-container p {
     line-height: 140%;
+    /* white-space: pre; */
 }
 
+.LandingPage-main-container h2 {
+    margin-top: 40px;
+}
 
+.how-to-guide {
+    /* width: 90%; */
+    max-width: 600px;
+    margin: 3vh auto 7vh auto;
+}
+
+.how-to-guide img {
+    width: 100%;
+}
+
+.get-started-here {
+    margin-bottom: 100px;
+}
+
+.get-started-here span {
+    color: #0d3b66;
+    text-decoration: underline;
+    transition-duration: 0.3s;
+    font-weight: bold;
+  }
+  
+  .get-started-here span:hover {
+    color: #96a5bf;
+    cursor: pointer;
+  }
 
 
 @keyframes fadeIn {
@@ -42,7 +70,7 @@
     }
 
     .LandingPage-main-container p {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     .LandingPage-main-container h2 {
@@ -59,7 +87,7 @@
     }
 
     .LandingPage-main-container p {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 
     .LandingPage-main-container h2 {
@@ -75,7 +103,7 @@
     }
 
     .LandingPage-main-container p {
-        font-size: 1.3rem;
+        font-size: 1.6rem;
     }
 
     .LandingPage-main-container h2 {

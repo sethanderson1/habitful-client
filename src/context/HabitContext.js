@@ -21,16 +21,16 @@ export const HabitContextProvider = props => {
     //     };
     //   };
 
-    const displayError = () => {
-        if (errorInContext) {
-            return (
-                <section>
-                    <h1>{JSON.stringify(errorInContext)}</h1>
-                </section>
-            )
-        }
-        return null
-    }
+    // const displayError = () => {
+    //     if (errorInContext) {
+    //         return (
+    //             <section>
+    //                 <h1>{JSON.stringify(errorInContext)}</h1>
+    //             </section>
+    //         )
+    //     }
+    //     return null
+    // }
 
 
     return (
@@ -48,8 +48,7 @@ export const HabitContextProvider = props => {
             isLoggedIn,
             setIsLoggedIn,
             errorInContext,
-            setErrorInContext,
-            displayError
+            setErrorInContext
         }}>
             {props.children}
         </HabitContext.Provider>

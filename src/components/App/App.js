@@ -74,11 +74,20 @@ const App = () => {
   //   }
   // }
 
+  
   function loginComponent() {
     if (isLoggedIn) {
       return LandingPage
     } else {
       return Login
+    }
+  }
+
+  function SignUpComponent() {
+    if (isLoggedIn) {
+      return LandingPage
+    } else {
+      return SignUp
     }
   }
 
@@ -129,7 +138,7 @@ const App = () => {
         <Route
           exact
           path={'/signup'}
-          component={SignUp}
+          component={SignUpComponent()}
         />
       </section>
 
