@@ -1,6 +1,5 @@
 .habit-card-container {
   /* display:block; */
-
 }
 
 .habit-card-wrapper {
@@ -11,10 +10,8 @@
   padding: 7px 4px;
   margin: 10px 5px;
   background-color: white;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
-  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.6);
-
-
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.6);
 }
 
 .habit-card-name {
@@ -42,37 +39,34 @@
 .habit-card-name:hover {
   /* color: rgb(51, 51, 194); */
   /* color: rgb(179 205 215); */
-  color:var(--habit-name-hover);
+  color: var(--habit-name-hover);
   /* color:#7389ae; */
-
-
 }
 
 .day-option {
   width: 80px;
   /* border: 1px solid black; */
-  animation: fadeIn 1s;
-
+  animation: fadeIn 0.4s;
 }
 
 @keyframes fadeIn {
   from {
-      opacity: 0;
+    opacity: 0;
   }
 
   to {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
 .day-option:last-child label .day-label-info-container {
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
 }
 
 .day-option:first-child label .day-label-info-container {
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
 .day-label {
@@ -89,10 +83,9 @@
   padding: 5px 2px;
   /* margin: 0 2px 0 2px; */
   /* box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.3); */
-  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.15);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
   border-radius: 0.25rem;
-
 }
 
 .day-label-info-container:hover {
@@ -104,21 +97,17 @@
 }
 
 .day-option {
-    border: 1px solid rgba(0, 0, 0, 0);
-
+  border: 1px solid rgba(0, 0, 0, 0);
 }
 
 .day-option:focus-within {
-    border: 1px solid rgb(168, 168, 168);
-    border-radius: 0.25rem;
-    /* box-shadow:0 3px 10px rgba(0, 0, 0, .16), 0 1px 10px rgba(0, 0, 0, .23); */
-
+  border: 1px solid rgb(168, 168, 168);
+  border-radius: 0.25rem;
+  /* box-shadow:0 3px 10px rgba(0, 0, 0, .16), 0 1px 10px rgba(0, 0, 0, .23); */
 }
-
 
 .day-label-info-container p {
   margin: 4px 3px;
-
 }
 
 input[type="checkbox"] {
@@ -127,14 +116,14 @@ input[type="checkbox"] {
 }
 
 label input[type="checkbox"]:checked + .day-label-info-container {
-    background-color: var(--date-checked);
-    /* font-weight: bold; */
-  }
+  background-color: var(--date-checked);
+  /* font-weight: bold; */
+}
 
-  label input[type="checkbox"]:checked + .day-label-info-container:hover {
-    background-color: var(--date-checked-hover);
-    /* font-weight: bold; */
-  }
+label input[type="checkbox"]:checked + .day-label-info-container:hover {
+  background-color: var(--date-checked-hover);
+  /* font-weight: bold; */
+}
 
 .day-name {
   font-family: "HKGrotesk-Light", sans-serif;
@@ -161,5 +150,3 @@ label input[type="checkbox"]:checked + .day-label-info-container {
   background-color: rgb(141, 155, 138);
   /* color: black; */
 }
-
-

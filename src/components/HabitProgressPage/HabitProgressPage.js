@@ -31,9 +31,10 @@ const HabitProgressPage = (props) => {
 
     const context = useContext(HabitContext);
     const { setHabitId, habitRecords,
-        setHabitRecords, setErrorInContext } = context;
+        setHabitRecords, errorInContext, setErrorInContext } = context;
 
     const habit_id = +props.match.params.habit_id;
+    console.log('habit_id', habit_id)
 
     useEffect(() => {
         toast.clearWaitingQueue();

@@ -15,14 +15,6 @@ const HabitsService = {
         try {
             console.log('HabitsService.getHabits() ran')
             const url = `${config.API_ENDPOINT}/habits`;
-            // const res = await axios
-            //     .get(url, {
-            //         headers: {
-            //             "authorization": `bearer ${'invalid auth token'}`
-            //         }
-            //     })
-
-            // todo: change back after test
             const res = await axios
                 .get(url, await this.reqHeaders())
             const resHabits = res.data;
@@ -31,6 +23,7 @@ const HabitsService = {
             const normalizedError = normalizeAxiosError(err)
             console.log('normalizedError', normalizedError)
             console.log('err', err)
+            return normalizedError
         }
     },
     async postHabit(newHabit) {
@@ -41,7 +34,10 @@ const HabitsService = {
             const resHabits = res.data;
             return resHabits;
         } catch (err) {
-            // console.log('err', err)
+            const normalizedError = normalizeAxiosError(err)
+            console.log('normalizedError', normalizedError)
+            console.log('err', err)
+            return normalizedError
         }
     },
     async getHabitById(id) {
@@ -52,7 +48,11 @@ const HabitsService = {
             const resHabit = res.data;
             return resHabit;
         } catch (err) {
-            // console.log('err', err)
+            const normalizedError = normalizeAxiosError(err)
+            
+            console.log('normalizedError', normalizedError)
+            console.log('err', err)
+            return normalizedError
         }
     },
     async updateHabit(newHabitFields, id) {
@@ -63,7 +63,10 @@ const HabitsService = {
             const updatedHabit = res.data;
             return updatedHabit;
         } catch (err) {
-            // console.log('err', err)
+            const normalizedError = normalizeAxiosError(err)
+            console.log('normalizedError', normalizedError)
+            console.log('err', err)
+            return normalizedError
         }
     },
     async deleteHabit(id) {
@@ -72,7 +75,10 @@ const HabitsService = {
             await axios
                 .delete(url, await this.reqHeaders())
         } catch (err) {
-            // console.log('err', err)
+            const normalizedError = normalizeAxiosError(err)
+            console.log('normalizedError', normalizedError)
+            console.log('err', err)
+            return normalizedError
         }
     }
 }
