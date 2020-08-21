@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useRef, useLayoutEffect } from 
 import { HabitContext } from '../../context/HabitContext';
 import { Line, Doughnut } from 'react-chartjs-2';
 import dayjs from 'dayjs';
+import { toast } from 'react-toastify';
 import HabitsService from '../../service/habits-service';
 import HabitRecordsService from '../../service/habit-record-service';
 import './HabitProgressPage.css';
@@ -35,7 +36,8 @@ const HabitProgressPage = (props) => {
     const habit_id = +props.match.params.habit_id;
 
     useEffect(() => {
-
+        toast.clearWaitingQueue();
+        toast.dismiss();
         const getHabit = async () => {
             const resHabit = await HabitsService
                 .getHabitById(habit_id)
