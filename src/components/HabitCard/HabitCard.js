@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import dayjs, { isDayjs } from 'dayjs';
-import { ToastContainer, toast, cssTransition, Zoom } from 'react-toastify';
+import dayjs from 'dayjs';
+import { ToastContainer, toast, cssTransition } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { HabitContext } from '../../context/HabitContext';
 import HabitRecordsService from '../../service/habit-record-service';
@@ -11,7 +11,7 @@ import './HabitCard.css';
 const HabitCard = props => {
 
     const context = useContext(HabitContext)
-    const { habitRecords, setHabitRecords } = context;
+    const { habitRecords, setHabitRecords, setErrorInContext } = context;
 
     const [selectedId, setSelectedId] = useState('');
 
@@ -73,24 +73,31 @@ const HabitCard = props => {
     const successToastPost = async (habit_id, dateSelected) => {
 
         const dateFormatted = dayjs(dateSelected).format('MMM DD');
-        const resHabit = await HabitsService.getHabitById(habit_id);
-        const habitName = resHabit && resHabit.name;
+        try {
 
-        // how to wait for loading to disappear from screen
-        // before displaying successToast ?
+            const resHabit = await HabitsService.getHabitById(habit_id);
+            const habitName = resHabit && resHabit.name;
+            // how to wait for loading to disappear from screen
+            // before displaying successToast ?
 
-        toast.clearWaitingQueue();
-        toast.dismiss();
+            toast.clearWaitingQueue();
+            toast.dismiss();
 
-        if (habitName) {
-            // const timer = window.setTimeout(() => {
-            toast.success(`completed '${habitName}' on ${dateFormatted}`, {
-                position: toast.POSITION.BOTTOM_CENTER,
-                autoClose: 3000,
-                // delay:1000
-            })
-            // }, 1500)
+            if (habitName) {
+                // const timer = window.setTimeout(() => {
+                toast.success(`completed '${habitName}' on ${dateFormatted}`, {
+                    position: toast.POSITION.BOTTOM_CENTER,
+                    autoClose: 3000,
+                    // delay:1000
+                })
+                // }, 1500)
+            }
+        } catch (error) {
+            console.log('successToastPost error', error)
+            setErrorInContext(error)
+
         }
+
     }
 
     const successToastDelete = async (habit_id, dateSelected) => {
@@ -127,15 +134,22 @@ const HabitCard = props => {
     }
 
     const deleteRecord = async (idx) => {
-        await HabitRecordsService
-            .deleteHabitRecord(habitRecords[idx].id)
+        console.log('deleteRecord ran')
+        try {
+            const resDeleted = await HabitRecordsService
+                .deleteHabitRecord(habitRecords[idx].id)
+            console.log('resDeleted', resDeleted)
+            return resDeleted;
+        } catch (error) {
+            console.log('deleteRecord error', error)
+        }
     }
 
     const getRecords = async () => {
         try {
             const resHabitRecords = await HabitRecordsService
                 .getHabitRecords();
-            console.log('resHabitRecords', resHabitRecords)
+            // console.log('resHabitRecords', resHabitRecords)
             if (!resHabitRecords) handleError()
             return resHabitRecords;
         } catch (err) {
@@ -208,43 +222,60 @@ const HabitCard = props => {
         }
     }
 
+    // todo: rewire post succcess toast and delete success toasts
+
     const handleSelectDay = async (day) => {
         console.log('handleSelectDay ran')
 
         loadingToast();
-
-        // toast.clearWaitingQueue();
-        // toast.dismiss();
-        // errorToast();
-
 
         const dateSelected = getDateSelected(day);
 
         // if a user selects a date, then clicks again to unselect,
         // need to delete that date from the record
         const isAlreadyChecked = isChecked(props.id, day);
+        console.log('isAlreadyChecked', isAlreadyChecked)
 
         if (isAlreadyChecked) {
-            const deleteStatus = await deleteRecord(
-                await findIdxToDelete(props.id, dateSelected));
-            console.log('deleteStatus', deleteStatus)
-            setHabitRecordsToContext();
+            const idxToDelete = await findIdxToDelete(props.id, dateSelected)
+            const deleted = await deleteRecord(idxToDelete);
+
+            console.log('deleted.status', deleted.status)
+            console.log('deleted', deleted)
+            // // console.log('deleted.HTTPStatusCode', deleted.HTTPStatusCode)
+
+
             setSelectedId(props.id);
-            successToastDelete(props.id, dateSelected);
+            try {
+                if (deleted.status !== 204) {
+                    console.log('error in delete')
+                    handleError();
+                } else {
+                    console.log('successful delete')
+                    setHabitRecordsToContext();
+                    successToastDelete(props.id, dateSelected);
+                }
+            } catch (error) {
+                console.log('error', error)
+            }
         } else {
-            const postedStatus = await postRecord(dateSelected);
-            console.log('postedStatus', postedStatus)
-            setSelectedId(props.id);
+            try {
+                const postedStatus = await postRecord(dateSelected);
+                console.log('postedStatus', postedStatus)
+                console.log('postedStatus.HTTPStatusCode', postedStatus.HTTPStatusCode)
+                setSelectedId(props.id); // todo: check if i need this                
+                if (postedStatus.HTTPStatusCode) {
+                    console.log('error in post')
+                    handleError();
+                } else {
+                    console.log('successful post')
+                    setHabitRecordsToContext();
+                    successToastPost(props.id, dateSelected);
+                }
+            } catch (error) {
+                console.log('error', error)
+            }
 
-            handleError()
-
-
-            // if (true) {
-            //     setHabitRecordsToContext();
-            //     successToastPost(props.id, dateSelected);
-            // } else {
-            //     handleError();
-            // }
         }
     }
 

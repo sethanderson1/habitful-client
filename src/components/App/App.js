@@ -82,8 +82,6 @@ const App = () => {
     }
   }
 
-
-
   return (
     <main className='App'>
 <ToastContainer limit={1} />

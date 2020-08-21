@@ -4,7 +4,7 @@ import config from '../../config';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboardList } from "@fortawesome/free-solid-svg-icons";
 import { HabitContext } from '../../context/HabitContext';
-import { ToastContainer, toast, cssTransition, Zoom } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login(props) {
@@ -13,18 +13,15 @@ export default function Login(props) {
     const [password, setPassword] = useState('');
 
     const context = useContext(HabitContext);
-    const { isLoggedIn, setIsLoggedIn } = context;
+    const {  setIsLoggedIn } = context;
 
     const loadingToast = async () => {
         console.log('loadingToast ran')
         toast.info(`loading...`, {
             position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 9000,
+            autoClose: false,
         })
     }
-
-
-
 
     function handleCancel() {
         props.history.push(`/`);
@@ -33,12 +30,10 @@ export default function Login(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         loadingToast();
-        const timer = window.setTimeout(() => {
         postLoginUser({
             email: username,
             password,
         });
-        }, 6000)
     };
 
     async function postLoginUser(credentials) {
@@ -65,7 +60,6 @@ export default function Login(props) {
                     <div className="login-error">
                         Incorrect username or password</div>
                 )
-                // console.log('err', err);'err', err)
             });
     };
 
@@ -75,8 +69,6 @@ export default function Login(props) {
 
     return (
         <div className='Login__login-form-container-wrapper'>
-            <ToastContainer />
-            {/* <BackButton handleClickBack={handleClickBack} /> */}
             <div className='Login__login-form-container'>
                 <h1 className='Login__login-title'>Login</h1>
                 <form id='login-form'

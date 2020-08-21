@@ -10,6 +10,7 @@ export const HabitContextProvider = props => {
     const [test,setTest] = useState([]);
     const [gapArray,setGapArray] = useState([]);
     const [isLoggedIn,setIsLoggedIn] = useState(false);
+    const [errorInContext, setErrorInContext] = useState(null);
 
     // checkBeforeAnything = () => {
     //     const authToken = localStorage.getItem('authToken');
@@ -35,7 +36,8 @@ export const HabitContextProvider = props => {
             setGapArray,
             isLoggedIn,
             setIsLoggedIn,
-            
+            errorInContext,
+            setErrorInContext
         }}>
             {props.children}
         </HabitContext.Provider>

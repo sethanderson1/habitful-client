@@ -1,13 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import config from '../../config';
-// import RecipesContext from '../RecipesContext';
 import ValidationError from '../ValidationError/ValidationError';
-// import BackButton from '../BackButton/BackButton';
 import './SignUp.css';
 import dayjs from 'dayjs';
 import { HabitContext } from '../../context/HabitContext';
 import HabitsService from '../../service/habits-service';
-import { ToastContainer, toast, cssTransition, Zoom } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const utc = require('dayjs/plugin/utc')
@@ -21,12 +19,12 @@ export default function SignUp(props) {
     const [nameTaken, setNameTaken] = useState(false);
 
     const context = useContext(HabitContext);
-    const { isLoggedIn, setIsLoggedIn } = context;
+    const { setIsLoggedIn } = context;
 
     const loadingToast = async () => {
         toast.info(`loading...`, {
             position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 9000,
+            autoClose: false,
         })
     }
 
@@ -37,15 +35,11 @@ export default function SignUp(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         loadingToast();
-        // const timer = window.setTimeout(() => {
-
-            postSignUpUser({
-                email: name,
-                password,
-                date_created: dayjs().utc().format()
-            });
-        // }, 1000)
-
+        postSignUpUser({
+            email: name,
+            password,
+            date_created: dayjs().utc().format()
+        });
     };
 
     async function postLoginUser(credentials) {
