@@ -1,68 +1,83 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Habitful
 
-## Available Scripts
+## Live App
+https://habitful-client.vercel.app/
 
-In the project directory, you can run:
+## API Interface:
+ [Habitful API](https://github.com/sethanderson1/habitful-api/)
+ 
+## Summary
+Use Habitful to track your progress on your habit goals
 
-### `npm start`
+## Screenshots
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Desktop View
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Landing Page
 
-### `npm test`
+![d-landing-page](https://user-images.githubusercontent.com/58465744/90896260-2e43d700-e378-11ea-9e4b-5a34c7034264.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- SignUp Page
 
-### `npm run build`
+![d-signup](https://user-images.githubusercontent.com/58465744/90897096-87603a80-e379-11ea-904d-d83e839672ae.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Login Page
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+![d-login](https://user-images.githubusercontent.com/58465744/90897099-87f8d100-e379-11ea-87d5-8dd91d086a86.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- My Habits Page
 
-### `npm run eject`
+![d-myhabits](https://user-images.githubusercontent.com/58465744/90897103-87f8d100-e379-11ea-97a3-ef46a6317e6a.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Habit Progress Page
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![d-graph](https://user-images.githubusercontent.com/58465744/90897094-86c7a400-e379-11ea-944e-c8adbf32e3fd.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Add Habit Page
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![d-addhabit](https://user-images.githubusercontent.com/58465744/90897090-862f0d80-e379-11ea-829b-c442452e195c.png)
 
-## Learn More
+- Edit Habit Page
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![d-edit](https://user-images.githubusercontent.com/58465744/90897620-461c5a80-e37a-11ea-9c36-05d3ffad33a8.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### Mobile View
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- Landing Page
 
-### Analyzing the Bundle Size
+![m-landing-page](https://user-images.githubusercontent.com/58465744/90896447-824ebb80-e378-11ea-976c-8899e2bfd651.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+- SignUp Page
 
-### Making a Progressive Web App
+![m-signup](https://user-images.githubusercontent.com/58465744/90897098-87603a80-e379-11ea-9825-bbb4c6241a29.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- Login Page
 
-### Advanced Configuration
+![m-login](https://user-images.githubusercontent.com/58465744/90897101-87f8d100-e379-11ea-8a9e-aea5d7384fdd.png)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
 
-### Deployment
+- My Habits Page
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+![m-myhabits](https://user-images.githubusercontent.com/58465744/90897106-88916780-e379-11ea-9158-9e1529fdeb6f.png)
 
-### `npm run build` fails to minify
+- Habit Progress Page
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![m-graph](https://user-images.githubusercontent.com/58465744/90897095-87603a80-e379-11ea-9297-71f55e4719c8.png)
+
+
+- Add Habit Page
+
+![m-addhabits](https://user-images.githubusercontent.com/58465744/90897092-86c7a400-e379-11ea-8270-effcb6dc2aac.png)
+
+- Edit Habit Page
+
+![m-edit](https://user-images.githubusercontent.com/58465744/90897622-46b4f100-e37a-11ea-9386-9815aa0050eb.png)
+
+
+
+## Technology Used
+- React
+- Node
+- Express
+- Postgres
