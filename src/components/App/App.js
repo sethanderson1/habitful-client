@@ -14,6 +14,7 @@ import './App.css'
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import axios from 'axios';
 import config from '../../config';
+import { ToastContainer } from 'react-toastify';
 
 const isBetween = require('dayjs/plugin/isBetween')
 dayjs.extend(isBetween)
@@ -85,7 +86,7 @@ const App = () => {
 
   return (
     <main className='App'>
-
+<ToastContainer limit={1} />
       <Route
         path={'/'}
         component={MainNav}

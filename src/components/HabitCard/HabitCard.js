@@ -36,9 +36,28 @@ const HabitCard = props => {
 
 
     const handleError = () => {
-        // console.log('handleError ran')
+
+
+        console.log('handleError ran')
+        toast.clearWaitingQueue();
+        toast.dismiss();
+        // const timer = window.setTimeout(() => {
+        // }, 500)
         errorToast();
+
+
     }
+
+    const errorToast = async () => {
+        console.log('errorToast ran')
+        toast.error(`something went wrong, please try again`, {
+            className: 'error-toast',
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: false,
+            // delay:1000
+        })
+    }
+
 
     // const handleSuccess = async (dateSelected, habit_id) => {
 
@@ -60,18 +79,8 @@ const HabitCard = props => {
         // how to wait for loading to disappear from screen
         // before displaying successToast ?
 
-        const dismissPromise = () => {
-            // return new Promise((resolve, reject) => {
-            removeToasts()
-            // })
-        }
-
-        const removeToasts = () => {
-            toast.clearWaitingQueue();
-            toast.dismiss();
-        }
-
-        dismissPromise()
+        toast.clearWaitingQueue();
+        toast.dismiss();
 
         if (habitName) {
             // const timer = window.setTimeout(() => {
@@ -102,13 +111,6 @@ const HabitCard = props => {
         }
     }
 
-    const errorToast = async () => {
-        toast.error(`something went wrong, please try again`, {
-            className: 'error-toast',
-            position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 2000
-        })
-    }
 
     const loadingToastAnimation = cssTransition({
         enter: 'zoomIn',
@@ -119,7 +121,7 @@ const HabitCard = props => {
         console.log('loadingToast ran')
         toast.info(`loading...`, {
             position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: 5000,
+            autoClose: false,
             transition: loadingToastAnimation
         })
     }
@@ -133,9 +135,11 @@ const HabitCard = props => {
         try {
             const resHabitRecords = await HabitRecordsService
                 .getHabitRecords();
+            console.log('resHabitRecords', resHabitRecords)
             if (!resHabitRecords) handleError()
             return resHabitRecords;
         } catch (err) {
+            console.log('err', err)
             handleError();
         }
     }
@@ -161,20 +165,6 @@ const HabitCard = props => {
         setHabitRecords(await getRecords());
     }
 
-    const postRecord = async (dateSelected) => {
-        const newHabitRecord = {
-            habit_id: props.id,
-            date_completed: dateSelected
-        }
-        try {
-            const resHabitRecords = await HabitRecordsService
-                .postHabitRecord(newHabitRecord);
-            return resHabitRecords;
-        } catch (err) {
-            console.log('err', err)
-            handleError();
-        }
-    }
 
     const handleClickName = (name) => {
         context.setHabitId(props.id)
@@ -202,10 +192,31 @@ const HabitCard = props => {
         }
     }
 
+    const postRecord = async (dateSelected) => {
+        console.log('postRecord ran')
+        const newHabitRecord = {
+            habit_id: props.id,
+            date_completed: dateSelected
+        }
+        try {
+            const resHabitRecords = await HabitRecordsService
+                .postHabitRecord(newHabitRecord);
+            return resHabitRecords;
+        } catch (err) {
+            console.log('err', err)
+            handleError();
+        }
+    }
+
     const handleSelectDay = async (day) => {
         console.log('handleSelectDay ran')
 
         loadingToast();
+
+        // toast.clearWaitingQueue();
+        // toast.dismiss();
+        // errorToast();
+
 
         const dateSelected = getDateSelected(day);
 
@@ -214,15 +225,26 @@ const HabitCard = props => {
         const isAlreadyChecked = isChecked(props.id, day);
 
         if (isAlreadyChecked) {
-            await deleteRecord(await findIdxToDelete(props.id, dateSelected));
+            const deleteStatus = await deleteRecord(
+                await findIdxToDelete(props.id, dateSelected));
+            console.log('deleteStatus', deleteStatus)
             setHabitRecordsToContext();
             setSelectedId(props.id);
             successToastDelete(props.id, dateSelected);
         } else {
-            await postRecord(dateSelected);
-            setHabitRecordsToContext();
+            const postedStatus = await postRecord(dateSelected);
+            console.log('postedStatus', postedStatus)
             setSelectedId(props.id);
-            successToastPost(props.id, dateSelected);
+
+            handleError()
+
+
+            // if (true) {
+            //     setHabitRecordsToContext();
+            //     successToastPost(props.id, dateSelected);
+            // } else {
+            //     handleError();
+            // }
         }
     }
 
@@ -270,7 +292,7 @@ const HabitCard = props => {
 
     return (
         <div className="habit-card-container">
-            {renderToastContainer(props.id)}
+            {/* {renderToastContainer(props.id)} */}
             <div className="habit-card-wrapper" >
                 <Link to={`/habits/${props.id}/habit-data`}
                     onClick={handleClickName}>
