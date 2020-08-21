@@ -32,7 +32,7 @@
   /* border: 1px solid black; */
   margin: 3px;
   padding: 10px;
-  width: 50%;
+  width: 100%;
 
   /* height:20% */
 }
@@ -52,7 +52,7 @@
   /* border: 1px solid #dddddd; */
   border-radius: 0.3rem;
   /* box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.4); */
-  box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 1px 2px rgba(0, 0, 0, .23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 1px 2px rgba(0, 0, 0, 0.23);
   background-color: white;
   /* display:flex; */
 }
@@ -108,7 +108,7 @@
 }
 
 .habit-strength-wrapper {
-  display: flex;
+  display: block;
   justify-content: space-between;
   /* margin-top: 5vh; */
   /* height:20%; */
@@ -137,7 +137,8 @@
   font-size: 3rem;
   text-align: center;
   margin: 0 0 10px 0;
-  font-size: min(10vw, 100px);  
+  font-size: 3rem;
+
 }
 
 .habit-strength {
@@ -148,19 +149,26 @@
   height:60vh;
 } */
 
-@media only screen and (max-width: 480px) {
+@media only screen and (min-width: 480px) {
   .habit-strength-wrapper {
-    display: block;
-    /* justify-content: space-between; */
-    /* height:20%; */
+    display: flex;
   }
+
+  .habit-name {
+    font-size: 2rem;
+  }
+
+  .habit-description {
+    font-size: 1.2rem;
+  }
+
+  .habit-indicator {
+    font-size: 1.3rem;
+  }
+
   .card {
-    /* border: 1px solid black; */
-    /* margin: 3px; */
-    /* padding: 10px; */
     /* todo:make sure this is flush with bottom card */
-    width: 100%;
-    /* height:20% */
+    width: 50%;
   }
 
   .habit-strength {
@@ -168,6 +176,47 @@
   }
 
   .habit-percentage {
-    font-size: 3rem;
+    font-size: min(10vw, 100px);
+  }
+}
+
+
+@media only screen and (min-width: 600px) {
+
+  .habit-indicator {
+    font-size: 1.6rem;
+  }
+
+}
+
+
+@media only screen and (min-width: 1024px) {
+  .habit-strength-wrapper {
+    display: flex;
+  }
+
+  .habit-name {
+    font-size: 2.2rem;
+  }
+
+  .habit-description {
+    font-size: 1.3rem;
+  }
+
+  .habit-indicator {
+    font-size: 1.8rem;
+  }
+
+  .card {
+    /* todo:make sure this is flush with bottom card */
+    width: 50%;
+  }
+
+  .habit-strength {
+    /* height: 20vh; */
+  }
+
+  .habit-percentage {
+    font-size: min(10vw, 100px);
   }
 }

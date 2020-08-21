@@ -46,6 +46,8 @@
 .day-option {
   width: 80px;
   /* border: 1px solid black; */
+  border: 1px solid rgba(0, 0, 0, 0);
+  width: 100%;
   animation: fadeIn 0.4s;
 }
 
@@ -94,10 +96,6 @@
   /* color:red; */
   background-color: var(--date-unchecked-hover);
   cursor: pointer;
-}
-
-.day-option {
-  border: 1px solid rgba(0, 0, 0, 0);
 }
 
 .day-option:focus-within {
@@ -149,4 +147,37 @@ label input[type="checkbox"]:checked + .day-label-info-container:hover {
 .success-toast-delete {
   background-color: rgb(141, 155, 138);
   /* color: black; */
+}
+
+@media only screen and (min-width: 480px) {
+  .habit-card-name {
+    font-size: 1.5rem;
+  }
+
+  .day-name,
+  .day-number {
+    font-size: 0.75rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .habit-card-name {
+    font-size: 1.7rem;
+  }
+
+  .day-name,
+  .day-number {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .habit-card-name {
+    font-size: 1.9rem;
+  }
+
+  .day-name,
+  .day-number {
+    font-size: 0.84rem;
+  }
 }
