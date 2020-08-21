@@ -25,27 +25,26 @@ const App = () => {
 
   const context = useContext(HabitContext);
   const { isLoggedIn, setIsLoggedIn } = context;
-
   useEffect(() => {
 
     // do warm up ping to wake up heroku 
     // upon first arriving to page
     const warmUpPing = async () => {
       console.log('warmUpPing ran')
-      const url = `${config.API_ENDPOINT}/habits`
-      await axios.get(url)
+      const url = `${config.API_ENDPOINT}/ping`
+      const res = await axios.get(url)
+      console.log('res', res)
     }
 
     warmUpPing();
 
+  }, [])
 
+  useEffect(() => {
 
     const authToken = localStorage.getItem('authToken');
     const loggedInStatus = authToken ? true : false;
     setIsLoggedIn(loggedInStatus);
-
-
-
 
   }, [isLoggedIn])
 
