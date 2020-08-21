@@ -14,16 +14,14 @@ Use Habitful to track your progress on your habit goals
 ### Desktop View
 
 - Landing Page
+
 ![d-landing-page](https://user-images.githubusercontent.com/58465744/90896260-2e43d700-e378-11ea-9e4b-5a34c7034264.png)
 
 - SignUp Page
-![d-signup](https://user-images.githubusercontent.com/58465744/86298885-b3e6aa00-bbb3-11ea-8e3d-54bdebd99fdd.png)
 
 - Login Page
-![d-login](https://user-images.githubusercontent.com/58465744/86298890-b517d700-bbb3-11ea-99f1-262ac4c03b83.png)
 
-- Categories Page
-![d-categoriesPage](https://user-images.githubusercontent.com/58465744/86298887-b47f4080-bbb3-11ea-85a2-2e46c1ac4841.png)
+- My Habits Page
 
 - Add Categories Page
 
@@ -52,7 +50,8 @@ Use Habitful to track your progress on your habit goals
 
 - Landing Page
 
-![m-landing](https://user-images.githubusercontent.com/58465744/86298878-b2b57d00-bbb3-11ea-9b09-814666c0fb9c.jpg)
+![m-landing-page](https://user-images.githubusercontent.com/58465744/90896447-824ebb80-e378-11ea-976c-8899e2bfd651.png)
+
 
 - SignUp Page
 
