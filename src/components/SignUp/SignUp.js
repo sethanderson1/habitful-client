@@ -179,7 +179,7 @@ export default function SignUp(props) {
                 });
             })
             .catch(async (err) => {
-                console.log('err', err)
+                // console.log('err', err)
                 if (err.error.message === '*Email already in use') {
                     setNameTaken(true);
                 };

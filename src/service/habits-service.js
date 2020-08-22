@@ -13,7 +13,7 @@ const HabitsService = {
     },
     async getHabits() {
         try {
-            console.log('HabitsService.getHabits() ran')
+            // console.log('HabitsService.getHabits() ran')
             const url = `${config.API_ENDPOINT}/habits`;
             const res = await axios
                 .get(url, await this.reqHeaders())

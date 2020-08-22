@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { HabitContext } from '../../context/HabitContext';
 import './MainNav.css';
+import { toast } from 'react-toastify';
+
 
 function MainNav(props) {
     const context = useContext(HabitContext);
@@ -10,6 +12,21 @@ function MainNav(props) {
     const handleLogout = () => {
         localStorage.removeItem('authToken');
         setIsLoggedIn(false);
+    }
+
+    const loadingToast = async () => {
+        toast.info(`loading...`, {
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 12000,
+        })
+    }
+
+    const handleClickMyHabits = () => {
+
+        // console.log('props', props)
+        if (props.location.pathname === '/') {
+            loadingToast();
+        }
     }
 
     const renderAddOrEdit = () => {
@@ -44,7 +61,9 @@ function MainNav(props) {
         if (isLoggedIn) {
             return (
                 <>
-                    <Link className="my-habits" to={'/habits'}>
+                    <Link className="my-habits" to={'/habits'}
+                        onClick={handleClickMyHabits}
+                    >
                         <p>My Habits</p>
                     </Link>
                     <div className="pipe"></div>

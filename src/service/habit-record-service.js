@@ -13,7 +13,7 @@ const HabitRecordsService = {
         }
     },
     async getHabitRecords() {
-        console.log('HabitsRecordsService.getHabitRecords() ran')
+        // console.log('HabitsRecordsService.getHabitRecords() ran')
         try {
             const url = `${config.API_ENDPOINT}/habit-records`
             const res = await axios.get(url, await this.reqHeaders())
@@ -25,7 +25,7 @@ const HabitRecordsService = {
         }
     },
     async postHabitRecord(newHabitRecord) {
-        console.log('HabitsRecordsService.postHabitRecord() ran')
+        // console.log('HabitsRecordsService.postHabitRecord() ran')
         try {
             const url = `${config.API_ENDPOINT}/habit-records`
             const res = await axios
@@ -42,7 +42,7 @@ const HabitRecordsService = {
             const url = `${config.API_ENDPOINT}/habit-records/record/${id}`
             const res = await axios.delete(url, await this.reqHeaders())
             const resDeletedRecord = res;
-            console.log('resDeletedRecord', resDeletedRecord)
+            // console.log('resDeletedRecord', resDeletedRecord)
             return resDeletedRecord;
         } catch (err) {
             const normalizedError = normalizeAxiosError(err)

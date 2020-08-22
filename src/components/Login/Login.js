@@ -16,7 +16,7 @@ export default function Login(props) {
     const {  setIsLoggedIn } = context;
 
     const loadingToast = async () => {
-        console.log('loadingToast ran')
+        // console.log('loadingToast ran')
         toast.info(`loading...`, {
             position: toast.POSITION.BOTTOM_CENTER,
             autoClose: false,

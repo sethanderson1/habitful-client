@@ -13,7 +13,6 @@ const HabitCardList = (props) => {
     const { habits, setHabits, setHabitRecords, setErrorInContext } = context;
 
     useEffect(() => {
-        console.log('useEffect in HabitCardList ran')
         toast.clearWaitingQueue();
         toast.dismiss();
         updateHabitsInContext();
@@ -26,18 +25,15 @@ const HabitCardList = (props) => {
             return resHabits;
         } catch (error) {
             setErrorInContext(error)
-            console.log('error', error)
         }
     }
     const updateHabitsInContext = async () => {
         try {
             const resHabits = await getHabits();
-            console.log('resHabits', resHabits)
             setHabits(resHabits);
         } catch (error) {
             setErrorInContext(error)
 
-            console.log('error', error)
         }
     }
     const getHabitRecords = async () => {
