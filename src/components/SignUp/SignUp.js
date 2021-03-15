@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const utc = require('dayjs/plugin/utc')
 dayjs.extend(utc);
-
+ 
 export default function SignUp(props) {
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
